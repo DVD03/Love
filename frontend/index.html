@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A cute bubbly animated love page for Dona. Designed with love.">
+    <title>For My Cute Dona</title>
+    
+    <!-- Google Fonts: Fredoka (Bubbly Rounded) & DynaPuff (Cartoony Bubbly) & Pacifico (Cute cursive) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=DynaPuff:wght@500;700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+    <div id="custom-cursor-loader"></div>
+
+    <!-- Spotlight Shadow Light -->
+    <div id="spotlight"></div>
+
+    <!-- Interactive Bubble Container -->
+    <div class="bubble-container" id="bubble-container"></div>
+
+    <!-- Canvas for floating particles and heart trails -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Music Player Controls -->
+    <div class="music-control cartoon-bounce" id="music-btn" title="Toggle music">
+        <div class="waves-container">
+            <span class="stroke"></span>
+            <span class="stroke"></span>
+            <span class="stroke"></span>
+            <span class="stroke"></span>
+            <span class="stroke"></span>
+        </div>
+        <i class="fa-solid fa-music"></i>
+    </div>
+
+    <!-- Screen 1: Intro Growing Heart -->
+    <section id="intro-screen" class="active">
+        <div class="intro-glass-container cartoon-box">
+            <h1 class="intro-title">A Cute Gift For</h1>
+            <h2 class="intro-name">Dona <span class="heart-emoji">💖</span></h2>
+            
+            <p class="intro-instruction">Tap/Click the big heart to unlock my feelings... 👇</p>
+            
+            <div class="growing-heart-wrapper">
+                <div class="heart-pulse-ring"></div>
+                <div class="heart-pulse-ring delay-1"></div>
+                <div class="growing-heart-btn cartoon-bounce" id="grow-heart">
+                    <!-- SVG Heart for perfect scaling -->
+                    <svg viewBox="0 0 32 29.6" class="heart-svg">
+                        <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+                        c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                    </svg>
+                    <span id="click-counter" class="counter-bubble">15</span>
+                </div>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="intro-progress"></div>
+            </div>
+            <p class="progress-hint" id="progress-text">Tap it 15 times to open!</p>
+        </div>
+    </section>
+
+    <!-- Screen 2: Main Love Dashboard -->
+    <section id="main-content">
+        <header class="main-header">
+            <div class="cute-badge">My Favorite Person</div>
+            <h1 class="main-title">I Love You, Dona!</h1>
+            <p class="subtitle">You make my world infinitely brighter and happier ✨</p>
+        </header>
+
+        <!-- Section: Love Timer -->
+        <div class="timer-section glass-card cartoon-box">
+            <h3>Our Love Journey ⏰</h3>
+            <div class="timer-display">
+                <div class="time-box cartoon-box-inner">
+                    <span id="days" class="time-num">00</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-box cartoon-box-inner">
+                    <span id="hours" class="time-num">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-box cartoon-box-inner">
+                    <span id="minutes" class="time-num">00</span>
+                    <span class="time-label">Mins</span>
+                </div>
+                <div class="time-box cartoon-box-inner">
+                    <span id="seconds" class="time-num">00</span>
+                    <span class="time-label">Secs</span>
+                </div>
+            </div>
+            <p class="timer-footer">...and ticking every second with you! 🥰</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Left Side: Polaroid and Envelope -->
+            <div class="media-container">
+                <!-- Polaroid Stack -->
+                <div class="polaroid-stack">
+                    <!-- Polaroid 3 (Back) -->
+                    <div class="polaroid polaroid-3 cartoon-box">
+                        <div class="polaroid-img-wrapper">
+                            <img src="couple_rain.png" alt="Couple in the rain">
+                        </div>
+                        <div class="polaroid-caption">
+                            <p>Through Any Storm ☔</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Polaroid 2 (Middle) -->
+                    <div class="polaroid polaroid-2 cartoon-box">
+                        <div class="polaroid-img-wrapper">
+                            <img src="couple_sunset.png" alt="Couple sunset">
+                        </div>
+                        <div class="polaroid-caption">
+                            <p>Beautiful Moments 🌅</p>
+                        </div>
+                    </div>
+
+                    <!-- Polaroid 1 (Front) -->
+                    <div class="polaroid polaroid-1 cartoon-box">
+                        <div class="polaroid-img-wrapper">
+                            <img src="couple_night.png" alt="Couple under purple sky">
+                        </div>
+                        <div class="polaroid-caption">
+                            <p>Dona & Me ✨</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="stack-hint">Tap photos to shuffle through our memories 📸</p>
+
+                <!-- 3D Love Envelope -->
+                <div class="envelope-wrapper">
+                    <div class="envelope" id="envelope">
+                        <div class="flap"></div>
+                        <div class="pocket"></div>
+                        <!-- Wax seal heart button -->
+                        <div class="envelope-seal" id="envelope-seal" title="Break the seal">
+                            <i class="fa-solid fa-heart"></i>
+                            <span class="seal-crack-left"></span>
+                            <span class="seal-crack-right"></span>
+                        </div>
+                        <div class="letter" id="letter">
+                            <div class="letter-content">
+                                <h4 class="letter-dear">Dearest Dona, 🌸</h4>
+                                <div class="letter-text-container">
+                                    <p id="typewriter-text"></p>
+                                </div>
+                                <p class="letter-sign">Yours Forever,<br><span class="signature">Dilum</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="envelope-hint" id="envelope-action-text">Break the heart seal to open the letter 💌</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Flip Cards -->
+            <div class="cards-container">
+                <h3 class="section-title">Why You Are So Special 🌟</h3>
+                <div class="cards-grid">
+                    <!-- Card 1 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card cartoon-box">
+                                <div class="card-icon"><i class="fa-solid fa-face-smile-beam"></i></div>
+                                <h4>Your Cute Smile</h4>
+                                <span class="tap-hint">Tap to reveal 🌸</span>
+                            </div>
+                            <div class="flip-card-back glass-card cartoon-box-back">
+                                <h4>Your Smile</h4>
+                                <p>The way your eyes light up and your smile brightens even my darkest days. It's my absolute favorite view in the whole world, Dona.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card cartoon-box">
+                                <div class="card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                                <h4>Your Kind Heart</h4>
+                                <span class="tap-hint">Tap to reveal ❤️</span>
+                            </div>
+                            <div class="flip-card-back glass-card cartoon-box-back">
+                                <h4>Your Kindness</h4>
+                                <p>You have the most caring soul. The way you care for me and everyone around you makes me fall in love with you more and more every single day.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card cartoon-box">
+                                <div class="card-icon"><i class="fa-solid fa-star"></i></div>
+                                <h4>Your Sparkle</h4>
+                                <span class="tap-hint">Tap to reveal ✨</span>
+                            </div>
+                            <div class="flip-card-back glass-card cartoon-box-back">
+                                <h4>Your Sparkle</h4>
+                                <p>You bring a unique energy and joy wherever you go. Life with you is never boring, it's an endless adventure filled with laughter.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card">
+                                <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                                <h4>My Safe Place</h4>
+                                <span class="tap-hint">Tap to reveal 🏠</span>
+                            </div>
+                            <div class="flip-card-back glass-card cartoon-box-back">
+                                <h4>My Sanctuary</h4>
+                                <p>In your arms, I feel safe, understood, and completely at home. You are my peaceful harbor in this chaotic world, and my absolute favorite person.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Interactive Proposal -->
+        <div class="proposal-section glass-card cartoon-box">
+            <h2 class="proposal-title">One Last Question... 🤔</h2>
+            <p class="proposal-text">Will you be my forever, Dona?</p>
+            <div class="proposal-buttons">
+                <button id="yes-btn" class="btn btn-yes cartoon-bounce">Yes, I will! 💖</button>
+                <button id="no-btn" class="btn btn-no">No 😢</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overlay Screen: Celebration when Yes is clicked -->
+    <div id="celebration-overlay" class="overlay">
+        <div class="celebration-content glass-card cartoon-box">
+            <div class="huge-heart-burst">
+                <svg viewBox="0 0 32 29.6" class="heart-svg pulse-fast">
+                    <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+                    c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                </svg>
+            </div>
+            <h2>Yay! You Said YES! 🎉🎈</h2>
+            <p class="celebration-msg">You have made me the happiest person alive, Dona! I promise to love you, cherish you, and stand by you through every step of our journey. Together forever! 💑</p>
+            <div class="celebration-photos">
+                <span>❤️ Forever & Always Dona ❤️</span>
+            </div>
+            <button id="close-overlay" class="btn btn-close cartoon-bounce">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
